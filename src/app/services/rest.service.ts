@@ -33,14 +33,17 @@ import { Usuarios, Usuario } from '../administration/interfaces/interface';
           password: mypassword})     
           .subscribe(data => {
             this.token = data.data.token; 
-            console.log(data);
-            resolve(data);            
+            resolve(data);   
+            console.log(data);   
+            err=> {
+              console.log(err)
+          }            
         });
   
       });
     }
-  
-    registrarUsuario(myName: string, mySecondname: string, myEmail: string, myPassword: string, myPasswordConf : string){
+
+      registrarUsuario(myName: string, mySecondname: string, myEmail: string, myPassword: string, myPasswordConf : string){
       return new Promise(resolve => {
         this.http.post(this.apiUrl + '/register', 
         {
@@ -56,10 +59,67 @@ import { Usuarios, Usuario } from '../administration/interfaces/interface';
       });
     }
   
-    obtenerUsuarios(tok: any){
+    activarUsuario(id: number){
+
+      return new Promise(resolve => {
+        this.http.post(this.apiUrl + '/activate',{
+          user_id: id
+        },
+        {
+          headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
+        })
+        .subscribe(data => {resolve(data)
+          console.log(data);
+        err => {
+          console.log(err);
+        }
+        })
+      })
+    }
+
+    desactivarUsuario(id: number){
+
+      return new Promise(resolve => {
+        this.http.post(this.apiUrl + '/deactivate',
+        {
+          user_id: id
+        },
+        {
+          headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
+        })
+        .subscribe(data => {resolve(data)
+          console.log(data);
+        err => {
+          console.log(err);
+        }
+        })
+      })
+    }
+  
+    eliminarUsuario(id: number){
+  
+      return new Promise(resolve => {
+        this.http.post(this.apiUrl + '/user/deleted' + id,
+        {
+          user_id: id
+        },
+        {
+          headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
+        })
+        .subscribe(data => {resolve(data)
+          console.log(data);
+        err => {
+          console.log(err);
+        }
+        })
+      })
+  
+    }
+
+    obtenerUsuarios(){
       return new Promise(resolve => {
         this.http.get<Usuarios>(this.apiUrl + '/users',{
-          headers: new HttpHeaders().set('Authorization', 'Bearer ' + tok)
+          headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
         })
         .subscribe(data => {resolve(data)
           console.log(data);
@@ -68,4 +128,5 @@ import { Usuarios, Usuario } from '../administration/interfaces/interface';
         }})
       })
     }
+  
   }

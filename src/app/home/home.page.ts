@@ -11,7 +11,7 @@ export class HomePage {
     {
     id: '1',
     title: 'prueba1',
-    img: 'assets/icon/logoAG.png',
+    img: 'assets/icon/logoFreeToGame.png',
     comentarios: ['pruebadec1.1', 'pruebadec2.1']
   }
 

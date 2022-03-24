@@ -3,30 +3,30 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Registrarse en FreeToGame</ion-title>
+    <ion-title>REGISTER</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Complete todos los campos</ion-card-title>
+      <ion-card-title>EDITAR USUARIO </ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <form [formGroup] = "formularioRegistration">
         <ion-item lines="full">
           <ion-label position="floating">Nombre</ion-label>
-          <ion-input formControlName = "nombre" type="text" required></ion-input>
+          <ion-input formControlName = "nombre" [(ngModel)]="user.firstname" type="text" required></ion-input>
         </ion-item>
 
         <ion-item lines="full">
           <ion-label position="floating">Apellidos</ion-label>
-          <ion-input formControlName = "apellidos" type="text" required></ion-input>
+          <ion-input formControlName = "apellidos" [(ngModel)]="user.secondname"  type="text" required></ion-input>
         </ion-item>
 
         <ion-item lines="full">
           <ion-label position="floating">Email</ion-label>
-          <ion-input formControlName = "email" type="text" required></ion-input>
+          <ion-input formControlName = "email"  type="text" [(ngModel)]="user.email" required></ion-input>
         </ion-item>
 
         <ion-item lines="full">
@@ -40,7 +40,8 @@
         </ion-item>
 
         <ion-col>
-          <ion-button (click)="register()" color="danger" expand="block">SING UP</ion-button>
+          <ion-button (click)="confirmar()" color="info" expand="block">CONFIRMAR</ion-button>
+          <ion-button (click)="cancelar()"  color="danger" expand="block">CANCELAR</ion-button>
         </ion-col>
       </form>
     </ion-card-content>

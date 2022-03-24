@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../services/rest.service';
 import { ViewChild } from '@angular/core';
-import { IonList } from '@ionic/angular';
+import { IonList, ModalController, LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { FormUserModalPage } from '../form-user-modal/form-user-modal.page';
 
 @Component({
   selector: 'app-administration',
@@ -11,36 +14,98 @@ import { IonList } from '@ionic/angular';
 export class AdministrationPage implements OnInit {
 
   usuarios : any
-  token : any
 
   //Referencia 
   @ViewChild('lista',{static:true}) lista: IonList;
 
-  constructor(private restService : RestService) {
-
+  constructor(
+    private restService : RestService,
+    public alertController: AlertController, 
+    private route: Router,
+    public modalForm: ModalController,
+    private loadingCtrl : LoadingController){
   }
 
   ngOnInit() {
 
-    this.restService.obtenerUsuarios(this.restService.token)
+    if(this.restService.token != undefined){
+      this.actualizar();
+
+  }
+  else{
+    this.route.navigate(['/login']);
+  }
+
+  }
+
+  async activar(user) {
+    this.restService.activarUsuario(user.id);
+
+    const alert = await this.alertController.create({
+      header: 'Activación exitosa',
+      message: 'El usuario ' + user.firstname + ' ' + user.secondname +  ' ha sido activado',
+      buttons: ['Aceptar'],
+    });
+    await alert.present();
+
+    this.lista.closeSlidingItems();
+    this.actualizar();
+   }
+
+   async desactivar(user) {
+    this.restService.desactivarUsuario(user.id);
+    
+    const alert = await this.alertController.create({
+      header: 'Desactivación exitosa',
+      message: 'El usuario ' + user.firstname + ' ' + user.secondname +  ' ha sido desactivado',
+      buttons: ['Aceptar'],
+    });
+    await alert.present();
+
+    this.lista.closeSlidingItems();
+    this.actualizar();
+   }
+
+   async eliminar(user) {
+    const alert = await this.alertController.create({
+      header: 'Confirmación',
+      message: '¿Desea eliminar a ' + user.firstname + ' ' + user.secondname + ' ?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            this.restService.eliminarUsuario(user.id)
+          }
+        }
+      ]
+    });
+    await alert.present();
+    
+    this.lista.closeSlidingItems();
+    this.actualizar();
+  }
+
+  async actualizar(){
+    const loading = await this.loadingCtrl.create({});
+    loading.present();
+    setTimeout(() => {
+      loading.dismiss();
+      this.getUsuarios()
+    }, 100 );
+  }
+
+  getUsuarios(){
+    if(this.restService.token != undefined){
+
+      this.restService.obtenerUsuarios()
     .then(usuario => {
       this.usuarios = usuario;
       this.usuarios = this.usuarios.data;
     });
-
-  }
-
-  favorito(user) {
-    console.log('favorite', user);
-    this.lista.closeSlidingItems();
-   }
-   compartir(user) {
-    console.log('share', user);
-    this.lista.closeSlidingItems();
-   }
-   borrar(user) {
-    console.log('delete', user);
-    this.lista.closeSlidingItems();
-   }
+  }}
 
 }

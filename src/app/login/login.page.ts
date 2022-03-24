@@ -3,7 +3,7 @@ import {  FormGroup,
           FormControl, 
           Validators, 
           FormBuilder } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { RestService } from '../services/rest.service';
 
 @Component({
@@ -13,18 +13,21 @@ import { RestService } from '../services/rest.service';
 })
 export class LoginPage implements OnInit {
   formularioLogin: FormGroup;
-  restService: RestService;
   usuario: string;
   contraseña: string;
+  data: any;
 
-  constructor(public fb: FormBuilder, public alertControler: AlertController,restService: RestService) { 
+  constructor(
+    public fb: FormBuilder, 
+    public alertControler: AlertController,
+    public restService: RestService,
+    public loadingCtrl: LoadingController
+    )
+    {
     this.formularioLogin = this.fb.group({
       'email': new FormControl("", Validators.required),
       'password': new FormControl("", Validators.required)
     })
-
-    this.restService = restService;
-    //this.restService.loginReal(this.formularioLogin.value.email, this.formularioLogin.value.password);
 
   }
 
@@ -44,7 +47,17 @@ export class LoginPage implements OnInit {
       return;
     }
 
-    this.restService.loginReal(this.formularioLogin.value.email, this.formularioLogin.value.password);
-  }
+    const loading = await this.loadingCtrl.create({});
+    loading.present();
+    setTimeout(() => {
+      loading.dismiss();
+      this.restService.loginReal(this.formularioLogin.value.email, this.formularioLogin.value.password)
+    .then(data => {
+      this.data = data;
+    })
+
+  },100);
+
+}
 
 }

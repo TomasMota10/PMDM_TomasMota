@@ -3,14 +3,14 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>LOG IN</ion-title>
+    <ion-title>Iniciar Sesión en FreeToGame</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>LOG IN</ion-card-title>
+      <ion-card-title>Escriba su correo y su contraseña</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <form [formGroup] = "formularioLogin">
@@ -26,7 +26,7 @@
       <br>
         <ion-row>
           <ion-col>
-            <ion-button (click)="login()" [routerLink]="['/administration']" type="submit" color="danger" expand="block">SING IN</ion-button>
+            <ion-button (click)="login()" [routerLink]="['/administration']" type="submit" color="danger" expand="block">INICIAR SESIÓN</ion-button>
             <br>
             <a [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a>
           </ion-col>

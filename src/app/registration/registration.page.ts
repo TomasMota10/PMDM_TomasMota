@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { RestService } from '../services/rest.service';
+import { Router } from '@angular/router';
 import {  FormGroup, 
           FormControl, 
           Validators, 
@@ -15,9 +16,8 @@ import {  FormGroup,
 export class RegistrationPage implements OnInit {
 
   formularioRegistration: FormGroup;
-  restService : RestService;
 
-  constructor(public fb: FormBuilder, public alertControler: AlertController, restService : RestService) {
+  constructor(public fb: FormBuilder, public alertControler: AlertController, public restService : RestService, public route:Router) {
 
     this.formularioRegistration = this.fb.group({
       'nombre': new FormControl("", Validators.required),
@@ -26,8 +26,6 @@ export class RegistrationPage implements OnInit {
       'password': new FormControl("", Validators.required),
       'confirmpassword': new FormControl("", Validators.required)
     })
-
-    this.restService = restService;
 
   }
 
@@ -57,7 +55,15 @@ export class RegistrationPage implements OnInit {
 
     localStorage.setItem('usuario', JSON.stringify(usuario));
 
-    console.log(usuario);
     this.restService.registrarUsuario
     (usuario.nombre, usuario.apellidos, usuario.email, usuario.password, usuario.confirmpassword);
+
+    const alert = await this.alertControler.create({
+      header: 'Registro',
+      message: 'Registro realizado con éxito, entre en su cuenta de correo para confirmar su cuenta.',
+      buttons: ['Aceptar'],
+    });
+    await alert.present();
+
+    this.route.navigate(['/login']);
 }}
