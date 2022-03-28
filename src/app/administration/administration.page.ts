@@ -83,6 +83,7 @@ export class AdministrationPage implements OnInit {
         }
       ]
     });
+    
     await alert.present();
     
     this.lista.closeSlidingItems();
@@ -107,5 +108,15 @@ export class AdministrationPage implements OnInit {
       this.usuarios = this.usuarios.data;
     });
   }}
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+      this.getUsuarios()
+    }, 50);
+  }
 
 }

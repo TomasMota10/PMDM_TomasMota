@@ -15,7 +15,7 @@ import { AdministrationPage } from './administration.page';
     FormsModule,
     IonicModule,
     AdministrationPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   declarations: [AdministrationPage],
 })

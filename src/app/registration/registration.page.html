@@ -9,16 +9,13 @@
 
 <ion-content>
   <ion-card>
-    <ion-card-header>
-      <ion-card-title>Complete todos los campos</ion-card-title>
-    </ion-card-header>
     <ion-card-content>
       <form [formGroup] = "formularioRegistration">
         <ion-item lines="full">
           <ion-label position="floating">Nombre</ion-label>
           <ion-input formControlName = "nombre" type="text" required></ion-input>
         </ion-item>
-
+      
         <ion-item lines="full">
           <ion-label position="floating">Apellidos</ion-label>
           <ion-input formControlName = "apellidos" type="text" required></ion-input>
@@ -28,7 +25,7 @@
           <ion-label position="floating">Email</ion-label>
           <ion-input formControlName = "email" type="text" required></ion-input>
         </ion-item>
-
+    
         <ion-item lines="full">
           <ion-label position="floating">Contraseña</ion-label>
           <ion-input formControlName = "password" type="password" required></ion-input>
@@ -38,9 +35,9 @@
           <ion-label position="floating">Confirmar contraseña</ion-label>
           <ion-input formControlName = "confirmpassword" type="password" required></ion-input>
         </ion-item>
-
+    
         <ion-col>
-          <ion-button (click)="register()" color="danger" expand="block">SING UP</ion-button>
+          <ion-button (click)="register()" color="danger" expand="block">Registrarse</ion-button>
         </ion-col>
       </form>
     </ion-card-content>

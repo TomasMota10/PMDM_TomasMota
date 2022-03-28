@@ -1,6 +1,10 @@
-<app-header titulo="Gestión Usuarios" url="/login"></app-header>
+<app-header titulo="Gestión Usuarios"></app-header>
 
 <ion-content>
+
+  <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
   <ion-list #lista>
     <ion-item-sliding *ngFor="let usuario of usuarios">
@@ -25,30 +29,6 @@
         </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-
-  <!-- <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button>
-        <ion-icon name="person"></ion-icon>
-        <ion-label>Users</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button>
-        <ion-icon name="close-circle"></ion-icon>
-        <ion-label>No Works</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button>
-        <ion-icon name="close-circle"></ion-icon>
-        <ion-label>No Works</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button>
-        <ion-icon name="close-circle"></ion-icon>
-        <ion-label>No Works</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs> -->
 </ion-content>
 <app-footer></app-footer>
 

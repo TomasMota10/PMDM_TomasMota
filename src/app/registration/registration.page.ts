@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { RestService } from '../services/rest.service';
-import { Router } from '@angular/router';
 import {  FormGroup, 
           FormControl, 
           Validators, 
-          FormBuilder, 
-          EmailValidator} from '@angular/forms';
+          FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -16,12 +15,14 @@ import {  FormGroup,
 export class RegistrationPage implements OnInit {
 
   formularioRegistration: FormGroup;
+  
 
-  constructor(public fb: FormBuilder, public alertControler: AlertController, public restService : RestService, public route:Router) {
+  constructor(private route: Router, public fb: FormBuilder, public alertControler: AlertController, public restService : RestService) {
 
     this.formularioRegistration = this.fb.group({
       'nombre': new FormControl("", Validators.required),
       'apellidos': new FormControl("", Validators.required),
+      'company_id': new FormControl("",Validators.required),
       'email': new FormControl("", Validators.required),
       'password': new FormControl("", Validators.required),
       'confirmpassword': new FormControl("", Validators.required)
@@ -48,6 +49,7 @@ export class RegistrationPage implements OnInit {
     var usuario = {
       nombre: f.nombre,
       apellidos: f.apellidos,
+      company_id: f.company_id,
       email: f.email,
       password: f.password,
       confirmpassword: f.confirmpassword
@@ -55,12 +57,13 @@ export class RegistrationPage implements OnInit {
 
     localStorage.setItem('usuario', JSON.stringify(usuario));
 
+    console.log(usuario);
     this.restService.registrarUsuario
     (usuario.nombre, usuario.apellidos, usuario.email, usuario.password, usuario.confirmpassword);
 
     const alert = await this.alertControler.create({
       header: 'Registro',
-      message: 'Registro realizado con éxito, entre en su cuenta de correo para confirmar su cuenta.',
+      message: 'Registro realizado con éxito',
       buttons: ['Aceptar'],
     });
     await alert.present();

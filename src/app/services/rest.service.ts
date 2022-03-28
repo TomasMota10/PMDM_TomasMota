@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Usuarios, Usuario } from '../administration/interfaces/interface';
+import { Usuarios } from '../administration/interfaces/interface';
 
 @Injectable({
     providedIn: 'root'
@@ -128,5 +128,5 @@ import { Usuarios, Usuario } from '../administration/interfaces/interface';
         }})
       })
     }
-  
+
   }

@@ -19,8 +19,10 @@ export class FormUserModalPage implements OnInit {
   formularioRegistration: FormGroup;
 
   @Input() user;
+  companies: any;
 
   constructor(public restService: RestService, public fb: FormBuilder, public modal: ModalController, public alertController: AlertController) {
+
     this.formularioRegistration = this.fb.group({
       'nombre': new FormControl("", Validators.required),
       'apellidos': new FormControl("", Validators.required),
@@ -64,16 +66,12 @@ export class FormUserModalPage implements OnInit {
               id: this.user.id,
               nombre: f.nombre,
               apellidos: f.apellidos,
+              company_id: f.company_id,
               email: f.email,
               password: f.password
             }
-
             console.log(usuario)
-
             localStorage.setItem('usuario', JSON.stringify(usuario));
-
-
-            this.modal.dismiss();
 
           }
         }

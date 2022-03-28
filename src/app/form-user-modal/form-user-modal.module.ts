@@ -14,7 +14,7 @@ import { FormUserModalPage } from './form-user-modal.page';
     FormsModule,
     IonicModule,
     FormUserModalPageRoutingModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [FormUserModalPage]
 })
