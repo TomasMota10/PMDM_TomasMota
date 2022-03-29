@@ -27,10 +27,6 @@ const routes: Routes = [
     path: 'administration',
     loadChildren: () => import('./administration/administration.module').then( m => m.AdministrationPageModule)
   },
-  {
-    path: 'form-user-modal',
-    loadChildren: () => import('./form-user-modal/form-user-modal.module').then( m => m.FormUserModalPageModule)
-  },
 ];
 @NgModule({
   imports: [

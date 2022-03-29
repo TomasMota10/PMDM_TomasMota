@@ -16,27 +16,27 @@
       <form [formGroup] = "formularioRegistration">
         <ion-item lines="full">
           <ion-label position="floating">Nombre</ion-label>
-          <ion-input formControlName = "nombre" [(ngModel)]="user.firstname" type="text" required></ion-input>
+          <ion-input formControlName = "nombre" [(ngModel)]="user.firstname" type="text" ></ion-input>
         </ion-item>
 
         <ion-item lines="full">
           <ion-label position="floating">Apellidos</ion-label>
-          <ion-input formControlName = "apellidos" [(ngModel)]="user.secondname"  type="text" required></ion-input>
+          <ion-input formControlName = "apellidos" [(ngModel)]="user.secondname"  type="text" ></ion-input>
         </ion-item>
 
         <ion-item lines="full">
           <ion-label position="floating">Email</ion-label>
-          <ion-input formControlName = "email"  type="text" [(ngModel)]="user.email" required></ion-input>
+          <ion-input formControlName = "email"  type="text" [(ngModel)]="user.email" ></ion-input>
         </ion-item>
 
         <ion-item lines="full">
           <ion-label position="floating">Contraseña</ion-label>
-          <ion-input formControlName = "password" type="password" required></ion-input>
+          <ion-input formControlName = "password" type="password" ></ion-input>
         </ion-item>
 
         <ion-item lines="full">
           <ion-label position="floating">Confirmar contraseña</ion-label>
-          <ion-input formControlName = "confirmpassword" type="password" required></ion-input>
+          <ion-input formControlName = "confirmpassword" type="password" ></ion-input>
         </ion-item>
 
         <ion-col>

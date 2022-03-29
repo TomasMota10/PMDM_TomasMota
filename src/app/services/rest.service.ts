@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuarios } from '../administration/interfaces/interface';
-
+import { AlertController } from '@ionic/angular';
 @Injectable({
     providedIn: 'root'
   })
   export class RestService {
     token: any;
     apiUrl = 'http://semillero.allsites.es/public/api';
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private AlertController: AlertController) { }
   
     login(){
       return new Promise(resolve => {
@@ -34,16 +34,14 @@ import { Usuarios } from '../administration/interfaces/interface';
           .subscribe(data => {
             this.token = data.data.token; 
             resolve(data);   
-            console.log(data);   
-            err=> {
-              console.log(err)
-          }            
+            console.log(data);
+            }, err => {
+              console.log('Mala');
         });
-  
       });
     }
 
-      registrarUsuario(myName: string, mySecondname: string, myEmail: string, myPassword: string, myPasswordConf : string){
+    registrarUsuario(myName: string, mySecondname: string, myEmail: string, myPassword: string, myPasswordConf : string){
       return new Promise(resolve => {
         this.http.post(this.apiUrl + '/register', 
         {
@@ -55,6 +53,8 @@ import { Usuarios } from '../administration/interfaces/interface';
           .subscribe(data => {
             console.log(data);
             resolve(data);
+          },err => {
+              console.log(err);
           });
       });
     }
@@ -99,7 +99,7 @@ import { Usuarios } from '../administration/interfaces/interface';
     eliminarUsuario(id: number){
   
       return new Promise(resolve => {
-        this.http.post(this.apiUrl + '/user/deleted' + id,
+        this.http.post(this.apiUrl + '/user/deleted/' + id,
         {
           user_id: id
         },
@@ -112,6 +112,7 @@ import { Usuarios } from '../administration/interfaces/interface';
           console.log(err);
         }
         })
+        
       })
   
     }
@@ -127,6 +128,10 @@ import { Usuarios } from '../administration/interfaces/interface';
           console.log(err)
         }})
       })
+    }
+
+    logout(){
+      this.token = null;
     }
 
   }

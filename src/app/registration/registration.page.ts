@@ -22,7 +22,6 @@ export class RegistrationPage implements OnInit {
     this.formularioRegistration = this.fb.group({
       'nombre': new FormControl("", Validators.required),
       'apellidos': new FormControl("", Validators.required),
-      'company_id': new FormControl("",Validators.required),
       'email': new FormControl("", Validators.required),
       'password': new FormControl("", Validators.required),
       'confirmpassword': new FormControl("", Validators.required)
@@ -35,7 +34,7 @@ export class RegistrationPage implements OnInit {
 
   async register(){
     var f = this.formularioRegistration.value;
-
+    console.log(f);
     if(this.formularioRegistration.invalid){
       const alert = await this.alertControler.create({
         header: 'Datos incompletos',
@@ -53,6 +52,16 @@ export class RegistrationPage implements OnInit {
       email: f.email,
       password: f.password,
       confirmpassword: f.confirmpassword
+    }
+
+    if(!(usuario.password === f.confirmpassword)){
+      const alert = await this.alertControler.create({
+        header: 'Contraseña incorrecta',
+        message: 'Las contraseñas no coinciden.',
+        buttons: ['Aceptar'],
+      });
+      await alert.present();
+      return;
     }
 
     localStorage.setItem('usuario', JSON.stringify(usuario));

@@ -8,12 +8,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormUserModalPageModule } from './form-user-modal/form-user-modal.module';
-
+import { RestService } from './services/rest.service';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormUserModalPageModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, RestService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -79,15 +79,13 @@ export class AdministrationPage implements OnInit {
           text: 'Confirmar',
           handler: () => {
             this.restService.eliminarUsuario(user.id)
+            this.lista.closeSlidingItems();
+            this.actualizar();
           }
         }
       ]
     });
-    
     await alert.present();
-    
-    this.lista.closeSlidingItems();
-    this.actualizar();
   }
 
   async actualizar(){
@@ -96,7 +94,7 @@ export class AdministrationPage implements OnInit {
     setTimeout(() => {
       loading.dismiss();
       this.getUsuarios()
-    }, 100 );
+    }, 150 );
   }
 
   getUsuarios(){
