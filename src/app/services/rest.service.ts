@@ -35,8 +35,15 @@ import { AlertController } from '@ionic/angular';
             this.token = data.data.token; 
             resolve(data);   
             console.log(data);
-            }, err => {
-              console.log('Mala');
+            }, async err => {
+              console.log('El usuario es erroneo o no existe.');
+              const alert = await this.AlertController.create({
+                header: 'Error al iniciar sesión',
+                message: 'El email o la contraseña no son correctos.',
+                buttons: ['Aceptar'],
+              });
+              await alert.present();
+              return;
         });
       });
     }

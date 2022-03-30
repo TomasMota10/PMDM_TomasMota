@@ -61,7 +61,9 @@ export class LoginPage implements OnInit {
       console.log(this.data.data.type);
       if(this.data.data.type == 'a'){
         this.router.navigate(['/administration'])
-      } else{
+      } else {
+        
+      }{
         
       }
 

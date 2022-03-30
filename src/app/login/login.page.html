@@ -27,6 +27,7 @@
         <ion-row>
           <ion-col>
             <ion-button (click)="login()" type="submit" color="danger" expand="block">INICIAR SESIÓN</ion-button>
+            <ion-button routerLink="/home" type="submit" color="primary" expand="block">CANCELAR</ion-button>
             <br>
             <a [routerLink]="['/forgot-password']" class="small-text">Has olvidado tu contraseña?</a>
           </ion-col>
