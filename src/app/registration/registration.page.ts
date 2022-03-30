@@ -22,7 +22,7 @@ export class RegistrationPage implements OnInit {
     this.formularioRegistration = this.fb.group({
       'nombre': new FormControl("", Validators.required),
       'apellidos': new FormControl("", Validators.required),
-      'email': new FormControl("", Validators.required ),
+      'email': new FormControl("", [Validators.email, Validators.required]),
       'password': new FormControl("", Validators.required),
       'confirmpassword': new FormControl("", Validators.required)
     })
@@ -32,18 +32,24 @@ export class RegistrationPage implements OnInit {
   ngOnInit() {
   }
 
+  async crearalert(variableHeader, variableMessage) {
+    console.log()
+    const alert = await this.alertControler.create({
+      header:variableHeader,
+      message: variableMessage,
+      buttons: ['Aceptar'],
+    });
+    await alert.present();
+    return;
+  }
+
   async register(){
     var f = this.formularioRegistration.value;
     console.log(f);
+    console.log(this.formularioRegistration.hasError);
     if(this.formularioRegistration.invalid){
-      const alert = await this.alertControler.create({
-        header: 'Datos incompletos',
-        message: 'Tienes que llenar todos los campos.',
-        buttons: ['Aceptar'],
-      });
-      await alert.present();
-      return;
-    }
+      this.crearalert("Datos incompletos","Tienes que llenar todos los campos.");
+    }else{
 
     var usuario = {
       nombre: f.nombre,
@@ -55,27 +61,19 @@ export class RegistrationPage implements OnInit {
     }
 
     if(!(usuario.password === f.confirmpassword)){
-      const alert = await this.alertControler.create({
-        header: 'Contraseña incorrecta',
-        message: 'Las contraseñas no coinciden.',
-        buttons: ['Aceptar'],
-      });
-      await alert.present();
-      return;
+      this.crearalert("Contraseña incorrecta","Las contraseñas no coinciden.");
+    }else{
+      localStorage.setItem('usuario', JSON.stringify(usuario));
+
+      console.log(usuario);
+      this.restService.registrarUsuario
+      (usuario.nombre, usuario.apellidos, usuario.email, usuario.password, usuario.confirmpassword);
+  
+      this.crearalert("Registro","Registro realizado con éxito, confirme su correo a traves del correo que le hemos enviado.");
+  
+      this.route.navigate(['/login']);
+      
     }
-
-    localStorage.setItem('usuario', JSON.stringify(usuario));
-
-    console.log(usuario);
-    this.restService.registrarUsuario
-    (usuario.nombre, usuario.apellidos, usuario.email, usuario.password, usuario.confirmpassword);
-
-    const alert = await this.alertControler.create({
-      header: 'Registro',
-      message: 'Registro realizado con éxito, confirme su correo a traves del correo que le hemos enviado.',
-      buttons: ['Aceptar'],
-    });
-    await alert.present();
-
-    this.route.navigate(['/login']);
-}}
+    }
+  }
+}

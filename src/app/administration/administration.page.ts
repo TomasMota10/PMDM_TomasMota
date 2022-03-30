@@ -23,7 +23,18 @@ export class AdministrationPage implements OnInit {
     public alertController: AlertController, 
     private route: Router,
     public modalForm: ModalController,
-    private loadingCtrl : LoadingController){
+    private loadingCtrl : LoadingController,){
+  }
+
+  async crearalert(variableHeader, variableMessage) {
+    console.log()
+    const alert = await this.alertController.create({
+      header:variableHeader,
+      message: variableMessage,
+      buttons: ['Aceptar'],
+    });
+    await alert.present();
+    return;
   }
 
   ngOnInit() {
@@ -39,29 +50,20 @@ export class AdministrationPage implements OnInit {
   }
 
   async activar(user) {
+    if(user.email_confirmed===1){
     this.restService.activarUsuario(user.id);
-
-    const alert = await this.alertController.create({
-      header: 'Activación exitosa',
-      message: 'El usuario ' + user.firstname + ' ' + user.secondname +  ' ha sido activado',
-      buttons: ['Aceptar'],
-    });
-    await alert.present();
-
+    this.crearalert("Activación exitosa",'El usuario ' + user.firstname + ' ' + user.secondname +  ' ha sido activado.');
     this.lista.closeSlidingItems();
     this.actualizar();
+   }else{
+    this.crearalert("Activación erronea",'El usuario ' + user.firstname + ' ' + user.secondname +  ' no ha confirmado su correo.');
+    this.lista.closeSlidingItems();
    }
+  }
 
    async desactivar(user) {
     this.restService.desactivarUsuario(user.id);
-    
-    const alert = await this.alertController.create({
-      header: 'Desactivación exitosa',
-      message: 'El usuario ' + user.firstname + ' ' + user.secondname +  ' ha sido desactivado',
-      buttons: ['Aceptar'],
-    });
-    await alert.present();
-
+    this.crearalert("Desactivación exitosa",'El usuario ' + user.firstname + ' ' + user.secondname +  ' ha sido desactivado.');
     this.lista.closeSlidingItems();
     this.actualizar();
    }

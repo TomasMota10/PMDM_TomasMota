@@ -24,6 +24,7 @@
         <ion-item lines="full">
           <ion-label position="floating">Email</ion-label>
           <ion-input formControlName = "email" type="text"></ion-input>
+          <small class="text-danger" *ngIf="formularioRegistration.get('email').hasError('email')">Este campo debe ser un correo electronico</small>
         </ion-item>
     
         <ion-item lines="full">

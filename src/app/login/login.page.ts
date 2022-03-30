@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
   }
 
   
-async loginusuarionoactivate(variableHeader, variableMessage) {
+async crearalert(variableHeader, variableMessage) {
   console.log()
   const alert = await this.alertControler.create({
     header:variableHeader,
@@ -53,16 +53,9 @@ async loginusuarionoactivate(variableHeader, variableMessage) {
   async login(){
 
     if(this.formularioLogin.invalid){
-      const alert = await this.alertControler.create({
-        header: 'Datos incompletos',
-        message: 'Tienes que llenar todos los campos.',
-        buttons: ['Aceptar'],
-      });
-      await alert.present();
-      return;
+      this.crearalert("Datos incompletos","Tienes que llenar todos los campos.");
     }
     
-
     const loading = await this.loadingCtrl.create({});
     loading.present();
      setTimeout(() => {
@@ -75,20 +68,14 @@ async loginusuarionoactivate(variableHeader, variableMessage) {
         this.router.navigate(['/administration'])
       } else if(this.data.data.type == 'u' && this.data.data.actived=='1'){
         console.log('Sesion iniciada con usuario activado')
-        this.router.navigate(['/user'])
+        this.router.navigate(['/user']);
       }else{
         console.log('El usuario sera activado por el administrador proximamente')
-        this.loginusuarionoactivate("Inicio de sesión no valido","El usuario sera activado por el administrador proximamente.");
+        this.crearalert("Inicio de sesión no valido","El usuario sera activado por el administrador proximamente.");
       }
 
     }) .catch(async error=>{console.log(error)
-        const alert = await this.alertControler.create({
-          header: 'Datos incompletos',
-          message: 'El email o la contraseña no son correctos.',
-          buttons: ['Aceptar'],
-        });
-        await alert.present();
-        return;
+      this.crearalert("Datos incompletos","El email o la contraseña no son correctos.");
     });
     },100);
   }

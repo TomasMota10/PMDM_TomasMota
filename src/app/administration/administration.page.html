@@ -11,6 +11,10 @@
       <ion-item *ngIf="usuario.type==='u' && usuario.deleted===0">
         <ion-label>
           <h3>{{ usuario.firstname }} {{ usuario.secondname }}</h3>
+          <p id=activado *ngIf="usuario.actived===1">Activado</p>
+          <p id=no_activado *ngIf="usuario.actived===0">No Activado</p>
+          <p id=email_noconfirmado *ngIf="usuario.email_confirmed===0">Correo no Confirmado</p>
+          <p id=email_confirmado *ngIf="usuario.email_confirmed===1">Correo Confirmado</p>
           <p>{{ usuario.email }}</p>
         </ion-label>
       </ion-item>
