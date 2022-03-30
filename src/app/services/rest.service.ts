@@ -67,7 +67,6 @@ import { AlertController } from '@ionic/angular';
     }
   
     activarUsuario(id: number){
-
       return new Promise(resolve => {
         this.http.post(this.apiUrl + '/activate',{
           user_id: id
@@ -85,7 +84,6 @@ import { AlertController } from '@ionic/angular';
     }
 
     desactivarUsuario(id: number){
-
       return new Promise(resolve => {
         this.http.post(this.apiUrl + '/deactivate',
         {

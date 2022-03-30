@@ -38,6 +38,18 @@ export class LoginPage implements OnInit {
 
   }
 
+  
+async loginusuarionoactivate(variableHeader, variableMessage) {
+  console.log()
+  const alert = await this.alertControler.create({
+    header:variableHeader,
+    message: variableMessage,
+    buttons: ['Aceptar'],
+  });
+  await alert.present();
+  return;
+}
+
   async login(){
 
     if(this.formularioLogin.invalid){
@@ -61,10 +73,12 @@ export class LoginPage implements OnInit {
       console.log(this.data.data.type);
       if(this.data.data.type == 'a'){
         this.router.navigate(['/administration'])
-      } else {
-        
-      }{
-        
+      } else if(this.data.data.type == 'u' && this.data.data.actived=='1'){
+        console.log('Sesion iniciada con usuario activado')
+        this.router.navigate(['/user'])
+      }else{
+        console.log('El usuario sera activado por el administrador proximamente')
+        this.loginusuarionoactivate("Inicio de sesión no valido","El usuario sera activado por el administrador proximamente.");
       }
 
     }) .catch(async error=>{console.log(error)

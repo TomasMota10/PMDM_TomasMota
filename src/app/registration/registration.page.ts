@@ -22,7 +22,7 @@ export class RegistrationPage implements OnInit {
     this.formularioRegistration = this.fb.group({
       'nombre': new FormControl("", Validators.required),
       'apellidos': new FormControl("", Validators.required),
-      'email': new FormControl("", Validators.required),
+      'email': new FormControl("", Validators.required ),
       'password': new FormControl("", Validators.required),
       'confirmpassword': new FormControl("", Validators.required)
     })
@@ -72,7 +72,7 @@ export class RegistrationPage implements OnInit {
 
     const alert = await this.alertControler.create({
       header: 'Registro',
-      message: 'Registro realizado con éxito',
+      message: 'Registro realizado con éxito, confirme su correo a traves del correo que le hemos enviado.',
       buttons: ['Aceptar'],
     });
     await alert.present();
