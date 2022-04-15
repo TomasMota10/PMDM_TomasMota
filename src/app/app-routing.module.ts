@@ -29,8 +29,16 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    loadChildren: () => import('./user/user.module').then( m => m.UserPageModule)
+     loadChildren: () => import('./user/user.module').then( m => m.UserPageModule)
   },
+  // {
+  //   path: 'game',
+  //   loadChildren: () => import('./user/game/game.module').then( m => m.GamePageModule)
+  // },
+  // {
+  //   path: 'platform',
+  //   loadChildren: () => import('./user/platform/platform.module').then( m => m.PlatformPageModule)
+  // },
 ];
 @NgModule({
   imports: [

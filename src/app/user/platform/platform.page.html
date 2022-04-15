@@ -1,0 +1,44 @@
+<app-header titulo="Plataformas disponibles"></app-header>
+<ion-content>
+    <ion-segment (ionChange)="getJuegos($event)">
+        <ion-segment-button value="pc">
+        <ion-icon ios="logo-windows" md="logo-windows"></ion-icon>
+          <ion-label>PC</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="browser">
+        <ion-icon name='desktop-outline'></ion-icon>
+          <ion-label>Browser</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      <virtual-scroll-element class="ion-content-scroll-host">
+        <ion-list>
+        <ion-card *ngFor="let juego of juegos">
+          <img src="{{ juego.thumbnail}}">
+          <ion-card-header>
+            <ion-card-title>{{juego.title}}</ion-card-title>
+            <ion-card-subtitle>{{juego.developer}}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <div *ngIf="!showAll">
+              {{juego| truncate:10:showAll}}
+              <ion-button (click)="showAll=true">Ver más</ion-button>
+            </div>
+            <div *ngIf="showAll">
+              {{juego.short_description}}
+              <ion-button (click)='showAll=false'>Ver menos</ion-button>
+            </div>
+            <div>
+              <ion-icon name="desktop-outline" *ngIf="juego.platform=='Web Browser'||juego.platform=='PC (Windows), Web Browser'"></ion-icon>
+              <ion-icon ios="logo-windows" md="logo-windows" *ngIf="juego.platform=='PC (Windows)'|| juego.platform=='PC (Windows), Web Browser'"></ion-icon>
+            </div>
+          </ion-card-content>
+        </ion-card>
+        </ion-list>
+      </virtual-scroll-element>
+        <ion-infinite-scroll>
+        <ion-infinite-scroll-content loadingText="Cargando">
+        </ion-infinite-scroll-content>  
+      </ion-infinite-scroll>
+      </ion-content>
+      
+      

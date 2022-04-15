@@ -6,7 +6,30 @@ import { UserPage } from './user.page';
 const routes: Routes = [
   {
     path: '',
-    component: UserPage
+    component: UserPage,
+    children:[
+      { path: '', 
+      redirectTo:'game', 
+      pathMatch:'full'},
+      {
+        path: 'game',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./game/game.module').then( m => m.GamePageModule)
+          }
+        ]
+      },
+      {
+        path: 'platform',
+        children:[
+            {
+              path: '',
+                loadChildren: () => import('./platform/platform.module').then( m => m.PlatformPageModule)
+              }
+        ]
+      }
+    ],
   }
 ];
 

@@ -13,3 +13,18 @@ export interface Usuario{
     deleted: number;
     created_at: Date;
 }
+
+export interface Juegos{
+    juegos: Juego[];
+}
+
+export interface Juego{
+    id: number;
+    title: string;
+    thumbnail: string;
+    short_description: string;
+    game_url: string;
+    platform: string;
+    developer: number;
+    readmore: boolean;
+}

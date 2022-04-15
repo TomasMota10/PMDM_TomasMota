@@ -1,5 +1,7 @@
 {
   "name": "PMDM_TomasMota",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

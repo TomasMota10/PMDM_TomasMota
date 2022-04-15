@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuarios } from '../administration/interfaces/interface';
+import { Juegos } from '../administration/interfaces/interface';
 import { AlertController } from '@ionic/angular';
 @Injectable({
     providedIn: 'root'
@@ -8,6 +9,11 @@ import { AlertController } from '@ionic/angular';
   export class RestService {
     token: any;
     apiUrl = 'http://semillero.allsites.es/public/api';
+    apiUrlGames = "https://free-to-play-games-database.p.rapidapi.com/api/games";
+    headersGame= {
+      'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com',
+      'X-RapidAPI-Key': '5b9b785409msh58ad96901bf0ff4p13390ajsn44378b704c79'
+      }
     constructor(private http: HttpClient, private AlertController: AlertController) { }
   
     login(){
@@ -138,5 +144,29 @@ import { AlertController } from '@ionic/angular';
     logout(){
       this.token = null;
     }
+
+    obtenerJuegos(plataforma){
+      if(plataforma ==''){
+        return new Promise(resolve => {
+          this.http.get<Juegos>(this.apiUrlGames,{headers:this.headersGame})
+          .subscribe(data => {resolve(data)
+            console.log(data);
+          err => {
+            console.log(err)
+          }})
+        })
+      }else{
+      return new Promise(resolve => {
+        this.http.get<Juegos>(this.apiUrlGames,{headers:this.headersGame, params:{platform:plataforma}})
+        .subscribe(data => {resolve(data)
+          console.log(data);
+        err => {
+          console.log(err)
+        }})
+      })
+    }
+    }
+
+
 
   }
