@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormUserModalPageModule } from './form-user-modal/form-user-modal.module';
 import { RestService } from './services/rest.service';
+import { SQLite } from '@ionic-native/sqlite';
+import { FavsLocalStorage } from './providers/favs-sqlite';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormUserModalPageModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, RestService],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, RestService, FavsLocalStorage],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

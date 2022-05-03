@@ -3,6 +3,7 @@ import { RestService } from '../../services/rest.service';
 import { Juego } from '../../administration/interfaces/interface';
 import { TruncatePipe } from './game.truncate.pipe';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { FavsLocalStorage } from 'src/app/providers/favs-sqlite';
 
 @Component({
   selector: 'app-game',
@@ -16,6 +17,7 @@ export class GamePage implements OnInit {
   constructor(
     private restService : RestService, 
     public truncate : TruncatePipe,
+    public favsLocalStorage:FavsLocalStorage
     ) 
   {
    }
@@ -24,6 +26,7 @@ export class GamePage implements OnInit {
   }
 
   juegos:Juego[];
+  favoritos:Juego[];
 
   async getJuegos(){
     this.restService.obtenerJuegos('')
@@ -32,6 +35,29 @@ export class GamePage implements OnInit {
       this.juegos = juegos;
       console.log(juegos);
     });
+    this.favoritos=this.favsLocalStorage.getDatabase();
+    console.log(this.favoritos);
+  }
+  
+  existsJuego(juego){
+    return this.favoritos.some( rest => rest['id'] === juego.id);
+  }
+  // async addFavorite(favorites){
+  //   console.log(favorites);
+  //   this.favsLocalStorage.addDatabase(favorites);
+  // }
+
+  addFavoritos(juego){
+    this.favsLocalStorage.addDatabase(juego);
+    this.getJuegos();
+  }
+
+  doRefresh(event){
+    this.getJuegos();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000)
   }
 
   public showAll: any = false;

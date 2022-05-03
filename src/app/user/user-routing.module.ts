@@ -28,6 +28,14 @@ const routes: Routes = [
                 loadChildren: () => import('./platform/platform.module').then( m => m.PlatformPageModule)
               }
         ]
+      },
+      {
+        path: 'favorites',
+        children: [
+          { path:'',
+              loadChildren: () => import('./favorites/favorites.module').then( m => m.FavoritesPageModule)
+          }
+        ]
       }
     ],
   }
