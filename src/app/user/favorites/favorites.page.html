@@ -1,6 +1,6 @@
 <app-header titulo="Tus juegos favoritos"></app-header>
 <ion-content>
-<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+<ion-refresher slot="fixed" (ionRefresh)="ionViewWillEnter()">
   <ion-refresher-content>
   </ion-refresher-content>
 </ion-refresher>
@@ -9,7 +9,7 @@
   <ion-card *ngFor="let juego of juegos">
     <img src="{{ juego.thumbnail}}">
     <div class="tablike">
-      <ion-button (click)="this.favsLocalStorage.deleteDatabase(juego.id)" fill="clear">
+      <ion-button (click)="deletedFavorites(juego)" fill="clear">
         <ion-icon name="heart-dislike" slot="icon-only"></ion-icon>
       </ion-button>
     </div>

@@ -4,6 +4,7 @@ import { Juego } from '../../administration/interfaces/interface';
 import { IonInfiniteScroll, Platform } from '@ionic/angular';
 import { TruncatePipe } from './favorites.truncate.pipe';
 import { FavsLocalStorage } from '../../providers/favs-sqlite';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-favorites',
@@ -16,6 +17,7 @@ export class FavoritesPage implements OnInit {
 
   constructor(
     private restService : RestService,
+    public alertController: AlertController, 
     public favsLocalStorage: FavsLocalStorage,
     public truncate : TruncatePipe,
     public platform: Platform
@@ -23,7 +25,11 @@ export class FavoritesPage implements OnInit {
 
   ngOnInit() {
    this.getFavorites();
+   
+  }
 
+  ionViewWillEnter() {
+   this.getFavorites();
   }
 
   doRefresh(event){
@@ -45,6 +51,11 @@ export class FavoritesPage implements OnInit {
   triggerReadMore(showAll) {
       showAll = true;
       console.log(showAll);
+  }
+
+  deletedFavorites(id){
+    this.favsLocalStorage.deleteDatabase(id);
+    this.getFavorites();
   }
   
 }

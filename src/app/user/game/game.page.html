@@ -1,6 +1,6 @@
 <app-header titulo="Juegos disponibles"></app-header>
 <ion-content>
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="ionViewWillEnter()">
     <ion-refresher-content>
     </ion-refresher-content>
   </ion-refresher>

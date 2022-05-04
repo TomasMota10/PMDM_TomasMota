@@ -57,6 +57,11 @@ getDatabase(){
     return arrayFav;
 }
 
+constructor(
+    public alertController: AlertController
+
+){}
+
 addDatabase(FavGame: Juego){
     console.log(FavGame);
     var arrayFav = JSON.parse(localStorage.getItem('Fav'));
@@ -68,17 +73,18 @@ addDatabase(FavGame: Juego){
         arrayFav.sort(({id:a}, {id:b}) => a-b);
 
     localStorage.setItem('Fav', JSON.stringify(arrayFav));
-    alert('Hola');
+    this.crearalert("Juego Favorito",'El juego ha sido movido a la pestaña favoritos.');
 }
 
-deleteDatabase(indexDeleted){
+deleteDatabase(juegoDelete){
     var arrayFav = JSON.parse(localStorage.getItem('Fav'));
     console.log(arrayFav);
     for(let i=0; i< arrayFav.length; i++){
     console.log([i]);
-          if(arrayFav[i].id == indexDeleted){
+          if(arrayFav[i].id == juegoDelete.id){
                 arrayFav.splice(i,1);
                   console.log("ELIMINADO");
+                  this.crearalert("Juego eliminado de favorito",'El juego '+juegoDelete.title+' ha sido eliminado de la pestaña favoritos.');
             }
     }
 
@@ -98,4 +104,15 @@ existsJuego(indexExists){
     return false;
 
 }
+
+async crearalert(variableHeader, variableMessage) {
+    console.log()
+    const alert = await this.alertController.create({
+      header:variableHeader,
+      message: variableMessage,
+      buttons: ['Aceptar'],
+    });
+    await alert.present();
+    return;
+  }
 }

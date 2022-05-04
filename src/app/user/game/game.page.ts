@@ -40,7 +40,10 @@ export class GamePage implements OnInit {
   }
   
   existsJuego(juego){
-    return this.favoritos.some( rest => rest['id'] === juego.id);
+    if (this.favoritos!=null){
+      return this.favoritos.some( rest => rest['id'] === juego.id)
+    }
+
   }
   // async addFavorite(favorites){
   //   console.log(favorites);
@@ -51,6 +54,10 @@ export class GamePage implements OnInit {
     this.favsLocalStorage.addDatabase(juego);
     this.getJuegos();
   }
+
+  ionViewWillEnter() {
+    this.getJuegos();
+   }
 
   doRefresh(event){
     this.getJuegos();
