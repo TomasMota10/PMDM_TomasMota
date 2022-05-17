@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RestService } from './services/rest.service';
 import { Router } from '@angular/router';
+import { BasketLocalStorage } from './providers/basket-sqlite';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
 export class AppComponent {
   constructor(
     public restService: RestService, 
-    public Router: Router
+    public Router: Router, 
+    public basketLocalStorage: BasketLocalStorage
   ) {}
 
   
@@ -21,6 +23,10 @@ console.log('logout')
  this.Router.navigate(['/login']);
 }
 
+async Pedidos(){
+console.log('pedidos')
+  this.Router.navigate(['/basket']);
+}
 
 }
 

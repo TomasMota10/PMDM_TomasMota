@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="user/favorites"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Tus pedidos</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-button color='secondary' expand='full'(click)="comprarPedidos()">Realizar Pedido</ion-button>
+  <ion-refresher slot="fixed" (ionRefresh)="ionViewWillEnter()">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+  <virtual-scroll-element class="ion-content-scroll-host">
+  <ion-list>
+    <ion-item *ngFor="let juego of juegos">
+      <ion-avatar slot="start">
+        <img src="{{ juego.thumbnail}}">
+      </ion-avatar>
+      {{juego.title}}  
+      <ion-icon name="desktop-outline" *ngIf="juego.platform=='Web Browser'||juego.platform=='PC (Windows), Web Browser'"></ion-icon>
+      <ion-icon ios="logo-windows" md="logo-windows" *ngIf="juego.platform=='PC (Windows)'|| juego.platform=='PC (Windows), Web Browser'"></ion-icon>
+    </ion-item>
+  </ion-list>
+</virtual-scroll-element>
+<ion-infinite-scroll>
+  <ion-infinite-scroll-content loadingText="Cargando">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
+</ion-content>

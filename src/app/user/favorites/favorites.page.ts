@@ -5,6 +5,7 @@ import { IonInfiniteScroll, Platform } from '@ionic/angular';
 import { TruncatePipe } from './favorites.truncate.pipe';
 import { FavsLocalStorage } from '../../providers/favs-sqlite';
 import { AlertController } from '@ionic/angular';
+import { BasketLocalStorage } from 'src/app/providers/basket-sqlite';
 
 @Component({
   selector: 'app-favorites',
@@ -20,7 +21,8 @@ export class FavoritesPage implements OnInit {
     public alertController: AlertController, 
     public favsLocalStorage: FavsLocalStorage,
     public truncate : TruncatePipe,
-    public platform: Platform
+    public platform: Platform,
+    public basketLocalStorage: BasketLocalStorage
   ) {this.getFavorites();}
 
   ngOnInit() {
@@ -58,4 +60,7 @@ export class FavoritesPage implements OnInit {
     this.getFavorites();
   }
   
+  addPedido(juego) {
+    this.basketLocalStorage.addDatabase(juego);
+  }
 }

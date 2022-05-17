@@ -7,7 +7,8 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item><ion-button (click)="logout()">Salir<ion-icon name="log-out"></ion-icon></ion-button></ion-item>
+        <ion-item><ion-button [disabled]="this.basketLocalStorage.isEmpty()" (click)="Pedidos()">Pedidos <ion-icon name="basket"></ion-icon></ion-button></ion-item>
+        <ion-item><ion-button (click)="logout()">Salir <ion-icon name="log-out"></ion-icon></ion-button></ion-item>
         <!-- <ion-item [routerLink]="['/login']">Salir<ion-icon name="log-out"></ion-icon></ion-item> -->
         <!-- <ion-item [routerLink]="['/login']">Log-In<ion-icon name="log-in"></ion-icon></ion-item>
         <ion-item [routerLink]="['/registration']">Register<ion-icon name="person-add"></ion-icon></ion-item>

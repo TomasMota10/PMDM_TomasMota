@@ -36,9 +36,17 @@ const routes: Routes = [
               loadChildren: () => import('./favorites/favorites.module').then( m => m.FavoritesPageModule)
           }
         ]
-      }
+      },
+      {
+        path: 'basket',
+        children: [
+          { path: '',
+            loadChildren: () => import('./basket/basket.module').then( m => m.BasketPageModule)
+          }
+        ]
+    }
     ],
-  }
+  },
 ];
 
 @NgModule({
