@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="user/basket"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Resumen del pedido</ion-title> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="printInvoice">  
+    <table class="tg">
+      <thead>
+        <tr>
+          <th>
+            <ion-label *ngFor="let juego of juegos; let i = index">
+              <td>
+                <p><strong>Pedido Nº </strong> {{ i+1 }}</p>              
+                <p><ion-img [src]="juego['thumbnail']"></ion-img></p>
+                <p><i>Título: </i><strong><span>{{ juego['title'] }}</span></strong></p>
+                <p><i>Descripción: </i><strong><span>{{ juego['short_description'] }}</span></strong><p>
+                <p><i>Desarrollador: </i><strong><span>{{ juego['developer'] }}</span></strong></p>
+                <p><i>Plataformas: </i><strong><span>{{ juego['platform'] }}</span></strong></p>
+                <p><i>Precio: </i><strong><span>Gratuito</span></strong>
+              </td>
+            </ion-label>
+          </th>          
+        </tr>
+      </thead>
+      <tbody>                                
+        <tr>
+          <td class="pie">Aceptado por FreeToGame</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ion-content>

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll, Platform } from '@ionic/angular';
 import { BasketLocalStorage } from 'src/app/providers/basket-sqlite';
 import { Juego } from '../../administration/interfaces/interface';
+import { BasketpdfPage } from '../basketpdf/basketpdf.page';
 
 @Component({
   selector: 'app-basket',
@@ -11,10 +12,13 @@ import { Juego } from '../../administration/interfaces/interface';
 export class BasketPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   juegos: any;
+  deletedBasket: any;
+  
 
   constructor(
   public platform: Platform,
-  public basketLocalStorage: BasketLocalStorage
+  public basketLocalStorage: BasketLocalStorage,
+  public basketPagePDF: BasketpdfPage
   ) { }
 
   ngOnInit() {
@@ -39,6 +43,7 @@ export class BasketPage implements OnInit {
   }
 
   async comprarPedidos() {
+    this.basketPagePDF.createPdf();
     this.basketLocalStorage.deletedBasket();
     this.getPedidos();
   }

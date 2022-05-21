@@ -12,12 +12,16 @@ import { RestService } from './services/rest.service';
 import { SQLite } from '@ionic-native/sqlite';
 import { FavsLocalStorage } from './providers/favs-sqlite';
 
+import { File } from '@awesome-cordova-plugins/file/ngx';
+import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
+import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormUserModalPageModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, RestService, FavsLocalStorage],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, RestService, FavsLocalStorage, File, FileOpener, EmailComposer],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -44,6 +44,14 @@ const routes: Routes = [
             loadChildren: () => import('./basket/basket.module').then( m => m.BasketPageModule)
           }
         ]
+    },
+  {
+    path: 'basketpdf',
+    children: [
+      { path: '',
+        loadChildren: () => import('./basketpdf/basketpdf.module').then( m => m.BasketpdfPageModule)
+      }
+     ]
     }
     ],
   },
