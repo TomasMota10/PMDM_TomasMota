@@ -68,7 +68,7 @@ export class BasketpdfPage implements OnInit {
       styles: {
         headerlest: {
           alignment: 'center',
-          width: '300%',
+          width: '50%',
           height: '100px',
         },
         header: {
@@ -164,7 +164,26 @@ data=this.getPedidos();
     };
   
 }
+
+enviarEmail(){
+  let email = {
+    to: 'tomasmotasanchez14@gmail.com',
+    attachments: [
+      'file://img/logo.png',
+      'res://icon.png',
+      'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
+      'file://file.pdf'
+    ],
+    subject: 'Cordova Icons',
+    body: 'How are you? Nice greetings from Leipzig',
+    isHtml: true
+  }
+  
+  // Send a text message using default options
+  this.emailComposer.open(email);
+}
+
+
+}
   
 
-  
-}
