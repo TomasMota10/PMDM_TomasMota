@@ -44,9 +44,9 @@ export class BasketPage implements OnInit {
 
   comprarPedidos() {
     this.basketPagePDF.getPedidos();
-    this.basketPagePDF.enviarEmail();
     //this.basketPagePDF.createPdf().then;
     this.basketLocalStorage.deletedBasket();
+    this.basketPagePDF.enviarEmail();
     this.getPedidos();
   }
 

@@ -174,8 +174,8 @@ enviarEmail(){
       'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
       'file://file.pdf'
     ],
-    subject: 'Cordova Icons',
-    body: 'How are you? Nice greetings from Leipzig',
+    subject: 'Pedido FreeToGame',
+    body: 'Buenas, aquí le dejamos su factura de pedido.',
     isHtml: true
   }
   
