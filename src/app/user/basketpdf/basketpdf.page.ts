@@ -11,6 +11,7 @@ pdfMake.vfs=pdfFonts.pdfMake.vfs;
 import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
 import { File } from '@awesome-cordova-plugins/file/ngx';
 import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
+import { BasketPage } from '../basket/basket.page';
 
 
 @Injectable({
@@ -26,6 +27,7 @@ export class BasketpdfPage implements OnInit {
   juegos:Juego[]=[];
   content: string;
   pdfObj=null;
+  contenido: string;
 
 
   constructor(
@@ -40,34 +42,43 @@ export class BasketpdfPage implements OnInit {
 
   ngOnInit() {
     this.getPedidos();
-    this.createPdf();
-    this.downloadPdf();
   }
 
-  async getPedidos() {
-    this.platform.ready().then(()=>{this.juegos=this.basketLocalStorage.getDatabase()});
+
+  async getPedidos(){
+    this.juegos= await this.basketLocalStorage.getDatabase();
+    console.log(this.juegos);
     this.createPdf().then(() => {
       this.downloadPdf();
-      this.juegos = [];
+      
     })
   }
 
   async createPdf() {
     var docDefinition = {
       content: [
-        {image: await this.getBase64ImageFromURL("../../assets/icon/logoFreeToGame.png")},
-        { text: 'Games order', style: 'header' },
-        { text: 'Date: ' + new Date().toTimeString(), style: 'subheader' },
-
+        {image: await this.getBase64ImageFromURL("../../assets/icon/logoFreeToGame.png"), style:'headerlest'},
+        { text: '\n FreeToGame.com:', style: 'header' },
+        { text: 'Aprobada esta compra por: FreeToGames.com', style: 'subheader' },
+        { text: 'Fecha del pedido: ' + new Date().toTimeString(), style: 'subheader' },
+        { text: '\n Tu lista de pedido es esta:', style: 'story'},
         this.table(this.juegos)
        
       ],
       styles: {
+        headerlest: {
+          alignment: 'center',
+          width: '300%',
+          height: '100px',
+        },
         header: {
+          alignment: 'center',
+          color: 'blue',
           fontSize: 18,
           bold: true,
         },
         subheader: {
+          color: 'black',
           fontSize: 14,
           bold: true,
           margin: [0, 15, 0, 0]
@@ -123,32 +134,35 @@ export class BasketpdfPage implements OnInit {
     }
   }
 
+data=this.getPedidos();
  table(data) {
   var value = [];
   var column = [];
-  column.push({ text: 'Image', style: 'tableHeader'});
-  column.push({ text: 'Title', style: 'tableHeader'});
-  column.push({ text: 'Description', style: 'tableHeader'});
+  column.push({ text: 'ID del Juego', style: 'tableHeader'});
+  column.push({ text: 'Titulo', style: 'tableHeader'});
+  column.push({ text: 'Descripción', style: 'tableHeader'});
+  column.push({ text: 'Precio', style: 'tableHeader'});
   value.push(column);
   value.push(column);
-  console.log(data);
     for (let i = 0; i < data.length; i++) {
     const juegos = data[i];
 
     var row = new Array();
-    row.push( juegos.thumbnail);
+    row.push( juegos.id);
     row.push( juegos.title);
     row.push( juegos.short_description);
+    row.push("Gratuito");
     value.push(row);
   }
+  console.log(data);
     return {
         table: {
-            widths: [ '*', '*', '*' ],
+            widths: [ '*', '*', '*','*' ],
             headerRows: 1,
             body: value
         }
     };
-
+  
 }
   
 

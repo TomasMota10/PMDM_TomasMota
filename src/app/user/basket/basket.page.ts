@@ -42,8 +42,9 @@ export class BasketPage implements OnInit {
     this.platform.ready().then(()=>{this.juegos=this.basketLocalStorage.getDatabase()});
   }
 
-  async comprarPedidos() {
-    this.basketPagePDF.createPdf();
+  comprarPedidos() {
+    this.basketPagePDF.getPedidos();
+    //this.basketPagePDF.createPdf().then;
     this.basketLocalStorage.deletedBasket();
     this.getPedidos();
   }
