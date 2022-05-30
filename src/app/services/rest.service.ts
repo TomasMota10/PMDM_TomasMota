@@ -167,6 +167,18 @@ import { AlertController } from '@ionic/angular';
     }
     }
 
+    getGames(){
+      return new Promise(resolve => {    
+        this.http.get<Juegos>(this.apiUrlGames,{headers:this.headersGame}
+        )
+        .subscribe(data => {resolve(data);
+          console.log(data);
+        err => {
+          console.log(err);
+        }})
+      })
+    }
+
 
 
   }

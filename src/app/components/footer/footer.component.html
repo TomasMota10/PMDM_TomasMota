@@ -2,24 +2,14 @@
   <ion-tab-bar>
    <ion-tabs>
     <ion-tab-bar slot="bottom">
-      <ion-tab-button>
+      <ion-tab-button [routerLink]="['/administration']">
         <ion-icon name="person"></ion-icon>
         <ion-label>Usuarios</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button>
-        <ion-icon name="aperture"></ion-icon>
-        <ion-label>En Proceso...</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button>
-        <ion-icon name="git-network"></ion-icon>
-        <ion-label>En Proceso...</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button>
-        <ion-icon name="refresh"></ion-icon>
-        <ion-label>En Proceso...</ion-label>
+      <ion-tab-button [routerLink]="['/analytics']">
+        <ion-icon name="analytics"></ion-icon>
+        <ion-label>Analiticas</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>

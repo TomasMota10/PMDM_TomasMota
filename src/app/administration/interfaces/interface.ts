@@ -26,5 +26,6 @@ export interface Juego{
     game_url: string;
     platform: string;
     developer: number;
+    genre: string;
     readmore: boolean;
 }

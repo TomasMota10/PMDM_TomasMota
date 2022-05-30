@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'basket',
     loadChildren: () => import('./user/basket/basket.module').then( m => m.BasketPageModule)
+  },
+  {
+    path: 'analytics',
+    loadChildren: () => import('./administration/analytics/analytics.module').then( m => m.AnalyticsPageModule)
   }
   // {
   //   path: 'game',

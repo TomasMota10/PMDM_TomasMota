@@ -15,11 +15,12 @@ import { FavsLocalStorage } from './providers/favs-sqlite';
 import { File } from '@awesome-cordova-plugins/file/ngx';
 import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
 import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
+import { ChartsModule} from 'ng2-charts';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormUserModalPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormUserModalPageModule, ChartsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, RestService, FavsLocalStorage, File, FileOpener, EmailComposer],
   bootstrap: [AppComponent],
